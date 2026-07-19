@@ -1,6 +1,6 @@
 import re
 from collections import Counter
-
+from docx import Document
 
 def get_words(text):
     return re.findall(r"\b\w+\b", text.lower())
@@ -8,13 +8,11 @@ def get_words(text):
 
 # Read the document
 def read_document(file_path):
-    with open(file_path, "r", encoding="utf-8") as file:
-        return file.read()
 
-    doc = Document(file_path)
+    docx = Document(file_path)
     paragraphs = []
 
-    for paragraph in doc.paragraphs:
+    for paragraph in docx.paragraphs:
         paragraphs.append(paragraph.text)
 
     return "\n".join(paragraphs)
@@ -75,7 +73,7 @@ def count_sentences(text):
 
 if __name__ == "__main__":
     # Path to news article document
-    file_path = "News Article for Python Assessment.txt"
+    file_path = "News Article for Python Assessment.docx"
 
     # Read the document
     text = read_document(file_path)
